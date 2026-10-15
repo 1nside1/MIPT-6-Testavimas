@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">WordCounterApp</string>
     <string name="hint_enter_text">Enter your text here...</string>
     <string name="btn_count_text">Count Metrics</string>
     <string name="txt_result_default">Result will be shown here</string>
