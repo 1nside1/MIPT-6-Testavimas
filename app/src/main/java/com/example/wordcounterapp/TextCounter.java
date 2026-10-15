@@ -1,12 +1,30 @@
 package com.example.wordcounterapp;
 
 public class TextCounter {
+
     // Zodziu skaiciavimas
     public static int countWords(String text) {
         if (text.trim().isEmpty()) {
             return 0;
         }
-        return text.trim().split("\\s+").length;
+
+        String[] tokens = text.trim().split("\\s+");
+        int count = 0;
+
+        for (String token : tokens) {
+            boolean hasLetter = false;
+            for (char c : token.toCharArray()) {
+                if (Character.isLetter(c)) {
+                    hasLetter = true;
+                    break;
+                }
+            }
+            if (hasLetter) {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     // Sakiniu skaiciavimas
@@ -14,7 +32,28 @@ public class TextCounter {
         if (text.trim().isEmpty()) {
             return 0;
         }
-        return text.split("[.!?]+").length;
+
+        // Išskaidome tekstą pagal taškus, klaustukus ar šauktukus
+        String[] tokens = text.split("[.!?]+");
+        int count = 0;
+
+        // Tikriname kiekvieną atskirtą dalį (galimą sakinį)
+        for (String token : tokens) {
+            boolean hasLetter = false;
+            // Tikriname, ar šioje dalyje yra bent viena raidė
+            for (char c : token.toCharArray()) {
+                if (Character.isLetter(c)) {
+                    hasLetter = true;
+                    break; // Radome raidę, toliau šios dalies tikrinti nebereikia
+                }
+            }
+            // Jei rado raidę, pridedame prie sakinių skaičiaus
+            if (hasLetter) {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     // Zenklu skaiciavimas
@@ -28,7 +67,7 @@ public class TextCounter {
         return count;
     }
 
-    // Skaiciu skaiciaivimas
+    // Skaiciu skaiciavimas
     public static int countNumbers(String text) {
         int count = 0;
         for (char c : text.toCharArray()) {
